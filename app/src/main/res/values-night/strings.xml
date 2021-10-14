@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="i_agree_to_the_terms_condition"><![CDATA[I agree To the Terms & Condition]]></string>
+    <string name="error_msg_email_">" Please enter email"</string>
+    <string name="error_msg_last_name">Please enter last name</string>
+    <string name="error_msg_f_name">Please enter first name</string>
+    <string name="error_msg_conf_passw_">Please enter confirm password</string>
+    <string name="error_msg_password_">Please enter password</string>
+    <string name="error_msg_conf_and_passw_">Password does not match</string>
+    <string name="error_msg_terms_">Please checked Terms and Conditions</string>
+</resources>
