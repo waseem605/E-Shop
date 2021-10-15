@@ -5,22 +5,37 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.e_shop.R
+import com.example.e_shop.firestore.FirestoreClass
+import com.example.e_shop.model.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : BaseActivity() {
+
+    private lateinit var mAuth: FirebaseAuth;
+    private lateinit var mDbReference: DatabaseReference
+    private lateinit var mStoryDatabase: DatabaseReference
+    private lateinit var mCurrentUser:String;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        mDbReference = FirebaseDatabase.getInstance().reference.child("Users")
+
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -34,11 +49,10 @@ class RegisterActivity : BaseActivity() {
 
         setupActionBar()
         loginLink.setOnClickListener {
-            val intent = Intent(this@RegisterActivity,LoginActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
         btn_register.setOnClickListener {
-            validateRegisterDetails()
+            registerUser()
         }
     }
 
@@ -61,7 +75,6 @@ class RegisterActivity : BaseActivity() {
                 false
             }
             TextUtils.isEmpty(lastNameR.text.toString().trim(){it<= ' '})->{
-                System.out.println("==========last name====")
 
                 showErrorSnackBar(resources.getString(R.string.error_msg_last_name),true)
                 false
@@ -87,7 +100,7 @@ class RegisterActivity : BaseActivity() {
                 false
             }
             else ->{
-                showErrorSnackBar("Your details are valid",false )
+                //showErrorSnackBar("Your details are valid",false )
                 true
             }
         }
@@ -96,6 +109,9 @@ class RegisterActivity : BaseActivity() {
     private fun registerUser(){
         //chack with validate function if the entries are valid or not
         if(validateRegisterDetails()){
+
+            //showProgressDialog(resources.getString(R.string.please_wait))
+
             val email  = emailID.text.toString().trim(){it <=' '}
             val password  = passwordR.text.toString().trim(){it <=' '}
 
@@ -107,12 +123,28 @@ class RegisterActivity : BaseActivity() {
                             //Firebase create user
                             val firebaseUser : FirebaseUser = task.result!!.user!!
 
-                            showErrorSnackBar("You are Register Successfully",false)
+                            val user = User(
+                                firebaseUser.uid,
+                                firstNameR.text.toString().trim(),
+                                lastNameR.text.toString().trim(),
+                                emailID.text.toString().trim()
+                            )
+                            FirestoreClass().registerUSer(this,user)
+
+                            FirebaseAuth.getInstance().signOut()
+                            finish()
                         }else{
+                            hideProgressDialog()
                             showErrorSnackBar(task.exception!!.message.toString(),true)
                         }
-                    })
-                }
+                     })
         }
+
+
+    }
+    fun userRegistrationSuccess(){
+        hideProgressDialog()
+        Toast.makeText(this,"Register successfully",Toast.LENGTH_SHORT).show()
+    }
 
 }

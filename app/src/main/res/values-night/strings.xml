@@ -8,4 +8,6 @@
     <string name="error_msg_password_">Please enter password</string>
     <string name="error_msg_conf_and_passw_">Password does not match</string>
     <string name="error_msg_terms_">Please checked Terms and Conditions</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="forgot_password_desc">Please enter your email we\'ll send you an email to reset your password</string>
 </resources>
