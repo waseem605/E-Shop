@@ -5,11 +5,15 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.e_shop.MainActivity
 import com.example.e_shop.R
+import com.example.e_shop.firestore.FirestoreClass
+import com.example.e_shop.model.User
+import com.example.e_shop.utilities.Constants
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
@@ -61,12 +65,12 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {  task ->
-                    hideProgressDialog()
+
                     if (task.isSuccessful){
-                        showErrorSnackBar("You are logged in successfully.",false)
-                        val intent = Intent(this,MainActivity::class.java)
-                        startActivity(intent)
+
+                        FirestoreClass().getUserDetails(this@LoginActivity)
                     }else{
+                        hideProgressDialog()
                         showErrorSnackBar(task.exception!!.message.toString(),true)
                     }
                 }
@@ -84,11 +88,27 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
                 showErrorSnackBar(resources.getString(R.string.error_msg_password_), true)
                 false
             }
-
             else -> {
-                showErrorSnackBar("Your details are valid. ", false)
                 true
             }
         }
+    }
+
+    fun userLoggedInSuccess(user:User){
+        hideProgressDialog()
+
+        //print the user details in the log
+        Log.i("First Name",user.firstName)
+        Log.i("last Name",user.lastName)
+        Log.i("Email",user.email)
+        if (user.profileCompleted==0){
+            val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
+            startActivity(intent)
+        }else {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
+        finish()
     }
 }

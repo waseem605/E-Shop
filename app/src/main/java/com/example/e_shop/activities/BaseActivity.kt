@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.dialog_progress.*
 
 open class BaseActivity : AppCompatActivity() {
 
-    private lateinit var mProgressDialog:Dialog
+     lateinit var mProgressDialog:Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,6 @@ open class BaseActivity : AppCompatActivity() {
             Snackbar.make(findViewById(android.R.id.content),message,Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
 
-        System.out.println("==========SnackBar====")
         if (errorMessage){
             snackBarView.setBackgroundColor(ContextCompat.getColor(this,R.color.snack_bar_error))
         }else{

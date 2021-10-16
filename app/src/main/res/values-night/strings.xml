@@ -10,4 +10,8 @@
     <string name="error_msg_terms_">Please checked Terms and Conditions</string>
     <string name="please_wait">Please wait...</string>
     <string name="forgot_password_desc">Please enter your email we\'ll send you an email to reset your password</string>
+    <string name="complete_profile">Complete Profile</string>
+    <string name="Read_stoaragePermission_denied">Oops, you just denied the permission for storage. You can also allow it from settings</string>
+    <string name="image_selection_failed">Image selection Failed</string>
+    <string name="err_msg_mobile_number">Please enter number</string>
 </resources>

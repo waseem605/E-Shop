@@ -57,6 +57,7 @@
                 android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_password_lt"
             android:layout_width="match_parent"
@@ -96,18 +97,20 @@
             android:background="@color/transparent"/>
 
 
-        <Button
+        <com.example.e_shop.utilities.ESButton
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:text="Login"
-            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="@dimen/button_padding"
             android:textSize="@dimen/button_textSize"
-            android:background="@drawable/button_background"/>
+            android:text="Save"
+            android:textColor="@color/white"/>
 
         <!--
                 <RelativeLayout

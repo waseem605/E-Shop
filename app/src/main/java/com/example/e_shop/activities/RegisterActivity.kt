@@ -127,7 +127,8 @@ class RegisterActivity : BaseActivity() {
                                 firebaseUser.uid,
                                 firstNameR.text.toString().trim(),
                                 lastNameR.text.toString().trim(),
-                                emailID.text.toString().trim()
+                                emailID.text.toString().trim(),
+                                passwordR.text.toString().trim()
                             )
                             FirestoreClass().registerUSer(this,user)
 

@@ -168,18 +168,22 @@
 
         </LinearLayout>
 
-        <Button
+        <com.example.e_shop.utilities.ESButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:text="Register"
-            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="@dimen/button_padding"
             android:textSize="@dimen/button_textSize"
-            android:background="@drawable/button_background"/>
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="@color/white"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"

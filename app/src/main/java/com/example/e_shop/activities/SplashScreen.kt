@@ -8,6 +8,8 @@ import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.e_shop.R
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +26,20 @@ class SplashScreen : AppCompatActivity() {
             )
         }
 
+        val user = Firebase.auth.currentUser
+
         val SPLASH_TIME = 2500
         @Suppress("DEPRECATION")
         Handler().postDelayed(
             {
+                /*
+                if (user != null) {
+                    // User is signed in
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                } else {
+                    // No user is signed in
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }*/
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }, SPLASH_TIME.toLong()
