@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -18,11 +17,13 @@ import com.example.e_shop.model.User
 import com.example.e_shop.utilities.Constants
 import com.example.e_shop.utilities.GlideLoader
 import kotlinx.android.synthetic.main.activity_user_profile.*
-import java.util.jar.Manifest
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var mUserDetails: User
+    private var mSelectedImageFilUri: Uri? = null
+    private var mUserProfileImageURL: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
@@ -72,25 +73,16 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.btn_submit -> {
-                    if (validateUserProfileDetails()){
-                        val userHashMap =HashMap<String,Any>()
-
-                        val mobileNumber = et_number.text.toString().trim() {it <= ' '}
-                        val gender = if (rb_male.isChecked){
-                            Constants.MALE
-                        }else{
-                            Constants.FEMALE
-                        }
-
-                        if (mobileNumber.isNotEmpty()){
-                            userHashMap[Constants.MOBILE]=mobileNumber.toLong()
-                        }
-                        userHashMap[Constants.GENDER]=gender
-
+                    if (validateUserProfileDetails()) {
                         showProgressDialog(resources.getString(R.string.please_wait))
 
-                        FirestoreClass().updateUserProfileData(this@UserProfileActivity,userHashMap)
+                        if (mSelectedImageFilUri != null) {
+                            FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFilUri)
+                        } else {
+                            updateUserProfileDetails()
+                        }
                     }
+
                 }
 
             }
@@ -107,6 +99,50 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 true
             }
         }
+    }
+
+    private fun updateUserProfileDetails(){
+        val userHashMap = HashMap<String, Any>()
+
+        val mobileNumber = et_number.text.toString().trim() { it <= ' ' }
+        val gender = if (rb_male.isChecked) {
+            Constants.MALE
+        } else {
+            Constants.FEMALE
+        }
+
+        if (mUserProfileImageURL.isNotEmpty()){
+            userHashMap[Constants.IMAGE] = mUserProfileImageURL
+        }
+
+        if (mobileNumber.isNotEmpty()) {
+            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+        }
+        userHashMap[Constants.GENDER] = gender
+
+        userHashMap[Constants.COMPLETE_PROFILE] = 1
+        FirestoreClass().updateUserProfileData(
+            this@UserProfileActivity,
+            userHashMap
+        )
+    }
+
+    //update Success function
+    fun userProfileUpdateSuccess(){
+        hideProgressDialog()
+        Toast.makeText(this,resources.getString(R.string.msg_profile_update),Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+
+    }
+
+    //Image upload Success function
+    fun imageUploadSuccess(imageURL:String){
+
+        // hideProgressDialog()
+        mUserProfileImageURL = imageURL
+
+        updateUserProfileDetails()
     }
 
     override fun onRequestPermissionsResult(
@@ -138,9 +174,9 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 if (data != null){
                     try {
                         //The uri of select image from phoneStorage
-                        val selectImageUri = data.data!!
+                        mSelectedImageFilUri = data.data!!
                         //iv_user_photo.setImageURI(Uri.parse(selectImageUri.toString()))
-                        GlideLoader(this).loadUserPicture(selectImageUri,iv_user_photo)
+                        GlideLoader(this).loadUserPicture(mSelectedImageFilUri!!,iv_user_photo)
 
                     }catch (e:Exception){
                         e.printStackTrace()

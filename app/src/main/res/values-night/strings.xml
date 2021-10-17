@@ -14,4 +14,5 @@
     <string name="Read_stoaragePermission_denied">Oops, you just denied the permission for storage. You can also allow it from settings</string>
     <string name="image_selection_failed">Image selection Failed</string>
     <string name="err_msg_mobile_number">Please enter number</string>
+    <string name="msg_profile_update">Profile updated successfully</string>
 </resources>

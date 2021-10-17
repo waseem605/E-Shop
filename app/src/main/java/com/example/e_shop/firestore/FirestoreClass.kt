@@ -2,6 +2,7 @@ package com.example.e_shop.firestore
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.util.Log
 import com.example.e_shop.activities.LoginActivity
 import com.example.e_shop.activities.RegisterActivity
@@ -12,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class FirestoreClass {
 
@@ -81,7 +84,8 @@ class FirestoreClass {
             .addOnFailureListener {
                 when(activity){
                     is UserProfileActivity ->{
-                        activity.hideProgressDialog()
+
+                        activity.userProfileUpdateSuccess()
                     }
                 }
                 Log.e(
@@ -89,6 +93,39 @@ class FirestoreClass {
                 "Error while updating",
                 )
             }
+    }
+
+    fun uploadImageToCloudStorage(activity: Activity,imageFileURI:Uri?){
+        val sRef :StorageReference = FirebaseStorage.getInstance().reference.child(
+            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis()+"."
+        + Constants.getFileExtension(activity,imageFileURI)
+        )
+
+        sRef.putFile(imageFileURI!!).addOnSuccessListener { taskSnapshot ->
+            //the image upload is success
+            Log.e("Firebase image uri", taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
+
+            //get the downloadable uri from the task snapshot
+            taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
+                Log.e("Downloadable image uri", uri.toString())
+                when(activity){
+                    is UserProfileActivity ->{
+                        activity.imageUploadSuccess(uri.toString())
+                    }
+                }
+
+            }
+        }
+            .addOnFailureListener{exception->
+                when(activity){
+                    is UserProfileActivity ->{
+                        activity.hideProgressDialog()
+                    }
+                }
+                Log.e(activity.javaClass.simpleName, exception.message,exception)
+
+            }
+
     }
 
 }

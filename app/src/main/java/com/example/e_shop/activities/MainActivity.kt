@@ -1,8 +1,9 @@
-package com.example.e_shop
+package com.example.e_shop.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.e_shop.R
 import com.example.e_shop.utilities.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
