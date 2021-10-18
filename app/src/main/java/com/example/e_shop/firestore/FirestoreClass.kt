@@ -4,15 +4,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import com.example.e_shop.activities.LoginActivity
-import com.example.e_shop.activities.RegisterActivity
-import com.example.e_shop.activities.UserProfileActivity
+import com.example.e_shop.activitiesUI.activities.LoginActivity
+import com.example.e_shop.activitiesUI.activities.RegisterActivity
+import com.example.e_shop.activitiesUI.activities.UserProfileActivity
 import com.example.e_shop.model.User
 import com.example.e_shop.utilities.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -22,7 +21,7 @@ class FirestoreClass {
     private lateinit var mDbReference: DatabaseReference
 
 
-    fun registerUSer(activity: RegisterActivity,userInfo:User){
+    fun registerUSer(activity: RegisterActivity, userInfo:User){
         mDbReference = FirebaseDatabase.getInstance().reference.child(Constants.USER)
 
         mDbReference.child(getCurrentUserId()).setValue(userInfo)

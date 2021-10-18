@@ -1,8 +1,8 @@
-package com.example.e_shop.activities
+package com.example.e_shop.activitiesUI.activities
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.e_shop.R
 import com.google.android.material.snackbar.Snackbar

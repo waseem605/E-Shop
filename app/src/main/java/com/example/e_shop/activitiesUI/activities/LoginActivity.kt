@@ -1,4 +1,4 @@
-package com.example.e_shop.activities
+package com.example.e_shop.activitiesUI.activities
 
 import android.content.Intent
 import android.os.Build
@@ -39,14 +39,14 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
         if (view!=null){
             when(view.id){
                 R.id.forget_password ->{
-                    val intent = Intent(this,ForgotPasswordActivity::class.java)
+                    val intent = Intent(this, ForgotPasswordActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.loginBtn ->{
                    loginUser()
                 }
                 R.id.signupLink ->{
-                    val intent = Intent(this,RegisterActivity::class.java)
+                    val intent = Intent(this, RegisterActivity::class.java)
                     startActivity(intent)
                 }
             }

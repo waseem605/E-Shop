@@ -1,4 +1,4 @@
-package com.example.e_shop.activities
+package com.example.e_shop.activitiesUI.activities
 
 import android.content.Intent
 import android.os.Build
@@ -40,7 +40,7 @@ class SplashScreen : AppCompatActivity() {
                     // No user is signed in
                     startActivity(Intent(this, LoginActivity::class.java))
                 }*/
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, DashboardActivity::class.java))
                 finish()
             }, SPLASH_TIME.toLong()
         )
