@@ -8,13 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.e_shop.R
 import com.example.e_shop.activitiesUI.activities.SettingsActivity
 
-class DashboardFragment : Fragment() {
+class ProductFragment : Fragment() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    //if we want to use the option menu in fragment we need to add it
-    setHasOptionsMenu(true)
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -22,9 +17,9 @@ class DashboardFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
 
-    val root = inflater.inflate(R.layout.fragment_dashboard,container,false)
-    val textView:TextView=root.findViewById(R.id.text_dashboard)
-    textView.text = "This is Dashboard v"
+    val root = inflater.inflate(R.layout.fragment_product,container,false)
+    val textView:TextView=root.findViewById(R.id.text_home)
+    textView.text = "This is Product"
     return root
   }
 
@@ -37,7 +32,7 @@ class DashboardFragment : Fragment() {
     val id = item.itemId
     when(id){
       R.id.action_setting ->{
-        startActivity(Intent(activity,SettingsActivity::class.java))
+        startActivity(Intent(activity, SettingsActivity::class.java))
         return true
       }
     }

@@ -99,7 +99,7 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
             intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
             startActivity(intent)
         }else {
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
             startActivity(intent)
         }
         finish()

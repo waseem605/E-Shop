@@ -19,6 +19,8 @@ object Constants {
     const val MOBILE:String = "mobile"
     const val GENDER:String = "gender"
     const val IMAGE:String = "image"
+    const val FIRST_NAME:String = "firstName"
+    const val LAST_NAME:String = "lastName"
     const val COMPLETE_PROFILE:String = "profileCompleted"
     const val USER_PROFILE_IMAGE:String = "user_profile_image"
 

@@ -32,15 +32,17 @@ class SplashScreen : AppCompatActivity() {
         @Suppress("DEPRECATION")
         Handler().postDelayed(
             {
-                /*
+
                 if (user != null) {
                     // User is signed in
-                    startActivity(Intent(this, UserProfileActivity::class.java))
+                    //startActivity(Intent(this, UserProfileActivity::class.java))
+                    startActivity(Intent(this, DashboardActivity::class.java))
+
                 } else {
                     // No user is signed in
                     startActivity(Intent(this, LoginActivity::class.java))
-                }*/
-                startActivity(Intent(this, DashboardActivity::class.java))
+                }
+                //startActivity(Intent(this, DashboardActivity::class.java))
                 finish()
             }, SPLASH_TIME.toLong()
         )

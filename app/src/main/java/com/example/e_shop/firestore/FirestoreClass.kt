@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.e_shop.activitiesUI.activities.LoginActivity
 import com.example.e_shop.activitiesUI.activities.RegisterActivity
+import com.example.e_shop.activitiesUI.activities.SettingsActivity
 import com.example.e_shop.activitiesUI.activities.UserProfileActivity
 import com.example.e_shop.model.User
 import com.example.e_shop.utilities.Constants
@@ -62,6 +63,9 @@ class FirestoreClass {
                         is LoginActivity -> {
                             activity.userLoggedInSuccess(user)
                         }
+                        is SettingsActivity -> {
+                            activity.userDetailsSuccess(user)
+                        }
                     }
                 }
             }
@@ -69,6 +73,7 @@ class FirestoreClass {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
+
 
         })
 

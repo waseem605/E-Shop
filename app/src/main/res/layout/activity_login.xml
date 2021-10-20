@@ -44,7 +44,7 @@
             app:boxStrokeWidthFocused="1.5dp"
             app:boxStrokeWidth="1dp"
             android:layout_marginTop="30dp"
-            android:hint="email">
+            android:hint="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
             app:boxStrokeWidth="1dp"
             app:passwordToggleEnabled="true"
             android:layout_marginTop="10dp"
-            android:hint="Password">
+            android:hint="@string/password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:id="@+id/forget_password"
-            android:text="Forget Password"
+            android:text="@string/forget_password"
             android:textAllCaps="false"
             android:layout_gravity="end"
             android:textSize="14sp"
@@ -109,7 +109,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:padding="@dimen/button_padding"
             android:textSize="@dimen/button_textSize"
-            android:text="Save"
+            android:text="@string/login"
             android:textColor="@color/white"/>
 
         <!--
@@ -161,14 +161,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't have Account click "
+                android:text="@string/don_t_have_account_click"
                 android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/signupLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="here "
+                android:text="@string/here"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="18sp"/>
         </LinearLayout>

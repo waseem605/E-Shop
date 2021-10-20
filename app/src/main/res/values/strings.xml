@@ -17,8 +17,22 @@
     <string name="msg_profile_update">Profile updated successfully</string>
     <string name="title_activity_dash_board">MainActivity</string>
     <string name="title_home">Home</string>
+    <string name="title_products">Products</string>
+    <string name="title_orders">Orders</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_my_dash_board">MainActivity</string>
     <string name="title_activity_my_dashboard">MainActivity</string>
+    <string name="action_setting">Setting</string>
+    <string name="btn_lbl_logout">Logout</string>
+    <string name="title_settings">Setting</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_addresses">Addresses</string>
+    <string name="email">email</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_account_click">Don\'t have Account click</string>
+    <string name="here">here</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>

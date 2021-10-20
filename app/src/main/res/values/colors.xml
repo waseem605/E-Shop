@@ -21,6 +21,16 @@
 
     <color name="snack_bar_error">#8BC34A</color>
     <color name="snack_bar_success">#F72400</color>
+
+    <color name="colorLightGrey">#F1F1F1</color>
+    <color name="colorBorder">#E8E6E6</color>
+    <color name="colorDarkGrey">#878787</color>
+    <color name="colorImageViewBackground">#E1E1E1</color>
+    <color name="colorOffWhite">#F8F8F8</color>
+    <color name="item_value_text_color">#545353</color>
+    <color name="dashboard_item_details_bg">#F3F3F3</color>
+
+
     <color name="silver">#f5f5f5</color>
     <color name="orange">#ff6600</color>
     <color name="green">#64b73b</color>
