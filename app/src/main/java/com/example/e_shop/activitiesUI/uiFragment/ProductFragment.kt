@@ -6,7 +6,7 @@ import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.e_shop.R
-import com.example.e_shop.activitiesUI.activities.SettingsActivity
+import com.example.e_shop.activitiesUI.activities.AddProductActivity
 
 class ProductFragment : Fragment() {
 
@@ -18,7 +18,7 @@ class ProductFragment : Fragment() {
   ): View? {
 
     val root = inflater.inflate(R.layout.fragment_product,container,false)
-    val textView:TextView=root.findViewById(R.id.text_home)
+    val textView:TextView=root.findViewById(R.id.tv_no_product_found)
     textView.text = "This is Product"
     return root
   }
@@ -31,8 +31,8 @@ class ProductFragment : Fragment() {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     val id = item.itemId
     when(id){
-      R.id.action_setting ->{
-        startActivity(Intent(activity, SettingsActivity::class.java))
+      R.id.action_add_product ->{
+        startActivity(Intent(activity, AddProductActivity::class.java))
         return true
       }
     }

@@ -35,4 +35,5 @@
     <string name="don_t_have_account_click">Don\'t have Account click</string>
     <string name="here">here</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="action_add_product">Add Product</string>
 </resources>
