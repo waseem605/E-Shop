@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activitiesUI.activities.AddProductActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_add_product_activity"
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
             android:paddingStart="@dimen/toolbar_title_paddingStart"
             android:paddingEnd="0dp"
             android:text="@string/title_add_product"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="@dimen/toolbar_title_text_size"
             android:textStyle="bold" />
 
@@ -85,7 +84,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fl_product_image">
 
-                <com.myshoppal.utils.MSPEditText
+                <com.example.e_shop.utilities.ESEditText
                     android:id="@+id/et_product_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,7 +108,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_product_title">
 
-                <com.myshoppal.utils.MSPEditText
+                <com.example.e_shop.utilities.ESEditText
                     android:id="@+id/et_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -170,7 +169,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.example.e_shop.utilities.ESButton
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_submit_add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -183,7 +182,7 @@
                 android:gravity="center"
                 android:paddingTop="@dimen/btn_padding"
                 android:paddingBottom="@dimen/btn_padding"
-                android:text="@string/btn_lbl_submit"
+                android:text="@string/add_product_btn_submit"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/btn_textSize"
                 app:layout_constraintBottom_toBottomOf="parent"

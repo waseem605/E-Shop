@@ -8,17 +8,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.e_shop.R
-import com.example.e_shop.activitiesUI.uiFragment.DashboardFragment
-import com.example.e_shop.activitiesUI.uiFragment.OrdersFragment
-import com.example.e_shop.activitiesUI.uiFragment.ProductFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class DashboardActivity : BaseActivity() {
-
-    private val dashboardFragment = DashboardFragment()
-    private val productFragment = ProductFragment()
-    private val ordersFragment = OrdersFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,22 +20,6 @@ class DashboardActivity : BaseActivity() {
         // Update the background color of the action bar as per our design requirement.
         supportActionBar!!.setBackgroundDrawable(ContextCompat.getDrawable(this@DashboardActivity,R.drawable.app_gradient_color_background))
         // END
-/*
-        replaceFragment(dashboardFragment)
-        nav_view.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-
-                R.id.nav_dashboard -> {
-                    System.out.println( "===================================================")
-                    replaceFragment(dashboardFragment)
-                }
-                R.id.nav_products -> replaceFragment(productFragment)
-                R.id.nav_orders -> replaceFragment(ordersFragment)
-            }
-            true
-        }
-*/
-
 
         //Bottom navigation not wordking
 

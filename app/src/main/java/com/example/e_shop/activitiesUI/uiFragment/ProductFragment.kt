@@ -10,11 +10,14 @@ import com.example.e_shop.activitiesUI.activities.AddProductActivity
 
 class ProductFragment : Fragment() {
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    //if we want to use the option menu in fragment we need to add it
+    setHasOptionsMenu(true)
+  }
 
   override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
+    inflater: LayoutInflater,container: ViewGroup?, savedInstanceState: Bundle?
   ): View? {
 
     val root = inflater.inflate(R.layout.fragment_product,container,false)
@@ -24,7 +27,7 @@ class ProductFragment : Fragment() {
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    inflater.inflate(R.menu.dashboard_menu,menu)
+    inflater.inflate(R.menu.add_product_menu,menu)
     super.onCreateOptionsMenu(menu, inflater)
   }
 

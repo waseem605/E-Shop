@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import com.example.e_shop.activitiesUI.activities.LoginActivity
-import com.example.e_shop.activitiesUI.activities.RegisterActivity
-import com.example.e_shop.activitiesUI.activities.SettingsActivity
-import com.example.e_shop.activitiesUI.activities.UserProfileActivity
+import com.example.e_shop.activitiesUI.activities.*
+import com.example.e_shop.model.Product
 import com.example.e_shop.model.User
 import com.example.e_shop.utilities.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -99,9 +97,9 @@ class FirestoreClass {
             }
     }
 
-    fun uploadImageToCloudStorage(activity: Activity,imageFileURI:Uri?){
+    fun uploadImageToCloudStorage(activity: Activity,imageFileURI:Uri?,imageType:String){
         val sRef :StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis()+"."
+            imageType + System.currentTimeMillis()+"."
         + Constants.getFileExtension(activity,imageFileURI)
         )
 
@@ -116,6 +114,9 @@ class FirestoreClass {
                     is UserProfileActivity ->{
                         activity.imageUploadSuccess(uri.toString())
                     }
+                    is AddProductActivity -> {
+                        activity.imageUploadSuccess(uri.toString())
+                    }
                 }
 
             }
@@ -128,6 +129,19 @@ class FirestoreClass {
                 }
                 Log.e(activity.javaClass.simpleName, exception.message,exception)
 
+            }
+
+    }
+
+    fun uploadProductDetails(activity:AddProductActivity,productInfo:Product){
+        mDbReference = FirebaseDatabase.getInstance().reference.child(Constants.PRODUCTS).push()
+
+        mDbReference.setValue(productInfo)
+            .addOnSuccessListener {
+                activity.productUploadSuccess()
+            }.addOnFailureListener {e->
+                activity.hideProgressDialog()
+                Log.e(this.toString(),"Error while uploading product details",e)
             }
 
     }
