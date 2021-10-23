@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.example.e_shop.activitiesUI.activities.*
 import com.example.e_shop.model.Product
 import com.example.e_shop.model.User
@@ -11,12 +12,13 @@ import com.example.e_shop.utilities.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class FirestoreClass {
 
-    private val mFirestore = FirebaseFirestore.getInstance()
+    private val mFireStore = FirebaseFirestore.getInstance()
     private lateinit var mDbReference: DatabaseReference
 
 
@@ -29,6 +31,26 @@ class FirestoreClass {
             }.addOnFailureListener{ e ->
                 activity.hideProgressDialog()
                 Log.e(this.toString(),"Error while registering the user",e)
+            }
+
+
+        mFireStore.collection(Constants.USER)
+            // Document ID for users fields. Here the document it is the User ID.
+            .document(userInfo.id)
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge later on instead of replacing the fields.
+            .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.userRegistrationSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while registering the user.",
+                    e
+                )
             }
 
     }
@@ -146,4 +168,25 @@ class FirestoreClass {
 
     }
 
+    fun uploadProductDetails(fragment: Fragment){
+        mDbReference = FirebaseDatabase.getInstance().reference.child(Constants.PRODUCTS)
+
+        mDbReference.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var productModel = snapshot.getValue(Product::class.java)
+                if (productModel != null){
+                    if (productModel.user_id.equals(getCurrentUserId())){
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
+    }
 }
