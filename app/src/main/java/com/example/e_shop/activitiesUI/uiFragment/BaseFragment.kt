@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.e_shop.R
-import org.w3c.dom.Text
 
 open class BaseFragment : Fragment() {
 
@@ -25,7 +24,7 @@ open class BaseFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_base, container, false)
     }
 
-    fun showProgressDialog(text:Text){
+    fun showProgressDialog(text: String){
         mProgressDialog = Dialog(requireActivity())
 
         mProgressDialog.setContentView(R.layout.dialog_progress)

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.e_shop.activitiesUI.activities.*
+import com.example.e_shop.activitiesUI.uiFragment.ProductFragment
 import com.example.e_shop.model.Product
 import com.example.e_shop.model.User
 import com.example.e_shop.utilities.Constants
@@ -23,17 +24,19 @@ class FirestoreClass {
 
 
     fun registerUSer(activity: RegisterActivity, userInfo:User){
+
         mDbReference = FirebaseDatabase.getInstance().reference.child(Constants.USER)
 
         mDbReference.child(getCurrentUserId()).setValue(userInfo)
             .addOnSuccessListener {
-                activity.userRegistrationSuccess()
+                //activity.userRegistrationSuccess()
             }.addOnFailureListener{ e ->
-                activity.hideProgressDialog()
+                //activity.hideProgressDialog()
                 Log.e(this.toString(),"Error while registering the user",e)
             }
 
 
+/*
         mFireStore.collection(Constants.USER)
             // Document ID for users fields. Here the document it is the User ID.
             .document(userInfo.id)
@@ -52,7 +55,7 @@ class FirestoreClass {
                     e
                 )
             }
-
+*/
     }
 
     fun getCurrentUserId():String{
@@ -166,17 +169,84 @@ class FirestoreClass {
                 Log.e(this.toString(),"Error while uploading product details",e)
             }
 
+        mFireStore.collection(Constants.PRODUCTS)
+            .document()
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                // Here call a function of base activity for transferring the result to it.
+                activity.productUploadSuccess()
+            }.addOnFailureListener { e ->
+
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product details.",
+                    e
+                )
+
+            }
     }
 
-    fun uploadProductDetails(fragment: Fragment){
+
+    fun getProductsList(fragment: Fragment) {
+
+        // The collection name for PRODUCTS
+        mFireStore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserId())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.e("Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.product_id = i.id
+
+                    productsList.add(product)
+                }
+
+                when (fragment) {
+                    is ProductFragment -> {
+                        fragment.successProductsListFromFireStore(productsList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (fragment) {
+                    is ProductFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+
+
+        ////////////////////////////////
+        /*
         mDbReference = FirebaseDatabase.getInstance().reference.child(Constants.PRODUCTS)
 
         mDbReference.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                val productsList: ArrayList<Product> = ArrayList()
                 var productModel = snapshot.getValue(Product::class.java)
                 if (productModel != null){
+                    // Here we have created a new instance for Products ArrayList.
                     if (productModel.user_id.equals(getCurrentUserId())){
-
+                        productModel.product_id = productModel.product_id
+                        productsList.add(productModel)
+                    }
+                }
+                when(fragment){
+                    is ProductFragment -> {
+                        fragment.successProductsListFromFireStore(productsList)
                     }
                 }
             }
@@ -184,9 +254,9 @@ class FirestoreClass {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
-
+*/
 
     }
+
 }

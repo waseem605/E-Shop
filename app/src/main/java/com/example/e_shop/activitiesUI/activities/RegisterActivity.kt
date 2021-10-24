@@ -137,7 +137,7 @@ class RegisterActivity : BaseActivity() {
 
     }
     fun userRegistrationSuccess(){
-        hideProgressDialog()
+        //hideProgressDialog()
         Toast.makeText(this,"Register successfully",Toast.LENGTH_SHORT).show()
     }
 
