@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_shop.R
 import com.example.e_shop.activitiesUI.activities.AddProductActivity
 import com.example.e_shop.firestore.FirestoreClass
 import com.example.e_shop.model.Product
+import com.myshoppal.ui.adapters.MyProductsListAdapter
+import kotlinx.android.synthetic.main.fragment_product.*
 
 class ProductFragment : BaseFragment() {
 
@@ -30,24 +33,24 @@ class ProductFragment : BaseFragment() {
       Log.i("Product Name ", i.title)
     }
 
-    /*
+
     if (productsList.size > 0) {
 
       rv_my_product_item.visibility = View.VISIBLE
-      tv_no_products_found.visibility = View.GONE
+      tv_no_product_found.visibility = View.GONE
 
-      rv_my_product_items.layoutManager = LinearLayoutManager(activity)
-      rv_my_product_items.setHasFixedSize(true)
+      rv_my_product_item.layoutManager = LinearLayoutManager(activity)
+      rv_my_product_item.setHasFixedSize(true)
 
       val adapterProducts =
-        MyProductsListAdapter(requireActivity(), productsList, this@ProductsFragment)
-      rv_my_product_items.adapter = adapterProducts
+        MyProductsListAdapter(requireActivity(), productsList, this@ProductFragment)
+      rv_my_product_item.adapter = adapterProducts
     } else {
-      rv_my_product_items.visibility = View.GONE
-      tv_no_products_found.visibility = View.VISIBLE
+      rv_my_product_item.visibility = View.GONE
+      tv_no_product_found.visibility = View.VISIBLE
     }
 
-     */
+
   }
 
   private fun getProductListFromFireStore(){
